@@ -136,7 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             // Rowes:
             Row(
+              // Alignement Main & Cross
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Text("First"),
                 Text("Second")
