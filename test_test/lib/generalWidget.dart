@@ -4,9 +4,10 @@ class GeneralWidget extends StatelessWidget {
   const GeneralWidget({
     Key key,
     @required this.pass,
-  }) : super(key: key);
+  this.delete}) : super(key: key);
 
   final Password pass;
+  final Function delete;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class GeneralWidget extends StatelessWidget {
           elevation: 2.0,
           child: Row(
           children: <Widget>[
+            IconButton(icon: Icon(Icons.delete), onPressed: this.delete),
             Text("${pass.context}"
             ),
             SizedBox(width:30.0),

@@ -21,12 +21,42 @@ class _PasswordsState extends State<Passwords> {
     Password(context:"Gmail" , password:"Motdepasse10")
     
       ];
+    void add(){
+      setState(() {
+      this.passwords.add(Password(context: "FFF", password:"jaoijdza"));
+        
+      });
+    }
+        void clearAll(){
+      setState(() {
+      this.passwords.clear();
+        
+      });
+    }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-      children:passwords.map((e) => GeneralWidget(pass: e)).toList() 
-      )
-      );
+    return Column(
+      children: <Widget>[
+        RaisedButton.icon(onPressed: clearAll, icon: Icon(Icons.delete_forever), label: Text("All")),
+        Row(
+          children: <Widget>[
+            FlatButton.icon(onPressed: add, icon: Icon(Icons.add), label: Text("Add Password")),
+            Container(
+              child: Column(
+              children:passwords.map((e) => GeneralWidget(
+                pass: e, 
+                delete:(){
+                  setState(() {
+                    passwords.remove(e);
+                  });
+                }
+                )
+                ).toList() 
+              )
+              ),
+          ],
+        ),
+      ],
+    );
   }
 }
