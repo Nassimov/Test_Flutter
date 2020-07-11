@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_test/routing_constants.dart';
 import 'firstFull.dart';
 import 'passwordWidget.dart';
 class MyHomePage extends StatefulWidget {
@@ -70,7 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               // FlatButton & Raised Button ont l'option X.icon
               RaisedButton.icon(
-                onPressed: (){}, 
+                onPressed: (){
+                 Navigator.pushNamed(context, RoutingRoute);
+                }, 
                 icon: Icon(
                   Icons.assignment_late
                 ), 
@@ -159,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                 ],
               ),
-              MyFirstStFull(),
+              //MyFirstStFull(),
               Passwords(),
             ],
           ),
