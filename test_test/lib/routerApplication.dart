@@ -9,7 +9,8 @@ Route<dynamic> generateRoute(RouteSettings settings){
     case HomeRoute:
       return MaterialPageRoute(builder: (context)=>MyHomePage(title:"Mon nouveau Titre de Flutter"));
     case RoutingRoute:
-      return MaterialPageRoute(builder: (context)=>MyRoutingClass());
+      var routingParam=settings.arguments;
+      return MaterialPageRoute(builder: (context)=>MyRoutingClass(title:routingParam,));
     default:
       return MaterialPageRoute(builder: (context)=>MyHomePage(title:"Mon nouveau Titre de Flutter"));
       break;

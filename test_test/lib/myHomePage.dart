@@ -1,7 +1,11 @@
+import 'dart:async';
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:test_test/routing_constants.dart';
 import 'firstFull.dart';
 import 'passwordWidget.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -13,15 +17,40 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("Initial méthode");
+    asynchroneOne();
+  }
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
+  // si je veux forcer l'affichage de One avant two ... async -> await
+  void asynchroneOne() async{
+    /*
+    
+    await Future.delayed(Duration(seconds:4),(){
+      print("One");
+    });
 
+    await Future.delayed(Duration(seconds:2),(){
+      print("Two");
+    });
+    
+    
+     */       
+    Response _response=await get('https://jsonplaceholder.typicode.com/todos/1');
+    print(_response.body);
+    Map myData=jsonDecode(_response.body);
+    print(myData["userId"]);
+  }
   @override
   Widget build(BuildContext context) {
+    print("Méthode build");
     return Scaffold(
       appBar: AppBar(
 
@@ -72,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // FlatButton & Raised Button ont l'option X.icon
               RaisedButton.icon(
                 onPressed: (){
-                 Navigator.pushNamed(context, RoutingRoute);
+                 Navigator.pushNamed(context, RoutingRoute, arguments: 'Nasssiiim');
                 }, 
                 icon: Icon(
                   Icons.assignment_late
