@@ -193,6 +193,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               //MyFirstStFull(),
               Passwords(),
+              Divider(),
+              RaisedButton(
+                onPressed: (){Navigator.pushNamed(context, TextFieldExampleRouting);},
+                child: Text("TextFields"),
+              ),
+              RaisedButton(
+                onPressed: (){Navigator.pushNamed(context, FormTextFieldExampleRouting);},
+                child: Text("FormTextFields"),
+              ),
             ],
           ),
         ),
