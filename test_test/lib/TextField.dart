@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 class TextFieldExample extends StatefulWidget {
   const TextFieldExample({Key key}) : super(key: key);
 
@@ -12,9 +13,10 @@ class _TextFieldExampleState extends State<TextFieldExample> {
 
   Widget _buildNumberTextField() {
     return TextField(
-      keyboardType: TextInputType.phone,
+      keyboardType: TextInputType.number,
       style: Theme.of(context).textTheme.headline6,
       decoration: InputDecoration(
+        hintText: 'Nassim',
         icon: Icon(Icons.attach_money),
         labelText: 'Enter an integer:',
         errorText: _numberInputIsValid ? null : 'Please enter an integer!',
@@ -24,7 +26,8 @@ class _TextFieldExampleState extends State<TextFieldExample> {
       ),
       onSubmitted: (val) =>
           // ignore: deprecated_member_use
-          Fluttertoast.showToast(context,msg: 'You entered: ${int.parse(val)}'),
+          Fluttertoast.showToast(context,
+              msg: 'You entered: ${int.parse(val)}'),
       onChanged: (String val) {
         final v = int.tryParse(val);
         debugPrint('parsed value = $v');
@@ -45,14 +48,15 @@ class _TextFieldExampleState extends State<TextFieldExample> {
       maxLines: 10,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-        counterText: '${this._controller.text.split(' ').length} words ${this._controller.text.length} lettres ',
+        counterText:
+            '${this._controller.text.split(' ').length} words ${this._controller.text.length} lettres ',
         labelText: 'Enter multiline text:',
         hintText: 'type something...',
         border: OutlineInputBorder(),
       ),
       onChanged: (text) => setState(() {
         print("text : $text");
-        }),
+      }),
     );
   }
 
@@ -86,36 +90,33 @@ class _TextFieldExampleState extends State<TextFieldExample> {
         prefix: Text("Prefixe widget"),
         hoverColor: Colors.red,
         focusColor: Colors.green,
-        ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("TextField"),
-        centerTitle:true,
-        backgroundColor:Colors.orangeAccent,
-      ),
-      body: ListView(
-      padding: EdgeInsets.all(8.0),
-      children: <Widget>[
-        ListTile(title: Text('1. Number input field')),
-        
-
-        _buildNumberTextField(),
-        ListTile(title: Text('2. Multiline input field')),
-        _buildMultilineTextField(),
-        ListTile(title: Text('3. Password input field')),
-        _buildPasswordTextField(),
-        ListTile(title: Text('4. Borderless input')),
-        _buildBorderlessTextField(),
-        RaisedButton(onPressed: (){
-          Navigator.pop(context);
-        })
-      ],
-    )
-    );
-     }
+        appBar: AppBar(
+          title: Text("TextField"),
+          centerTitle: true,
+          backgroundColor: Colors.orangeAccent,
+        ),
+        body: ListView(
+          padding: EdgeInsets.all(8.0),
+          children: <Widget>[
+            ListTile(title: Text('1. Number input field')),
+            _buildNumberTextField(),
+            ListTile(title: Text('2. Multiline input field')),
+            _buildMultilineTextField(),
+            ListTile(title: Text('3. Password input field')),
+            _buildPasswordTextField(),
+            ListTile(title: Text('4. Borderless input')),
+            _buildBorderlessTextField(),
+            RaisedButton(onPressed: () {
+              Navigator.pop(context);
+            })
+          ],
+        ));
+  }
 }

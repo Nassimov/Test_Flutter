@@ -30,133 +30,130 @@ class _TextFormFieldExampleState extends State<TextFormFieldExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-        title: Text("FormField"),
-        centerTitle:true,
-        backgroundColor:Colors.orangeAccent,
-      ),
-      //Scroll object ---
-      /* 
+        appBar: AppBar(
+          title: Text("FormField"),
+          centerTitle: true,
+          backgroundColor: Colors.orangeAccent,
+        ),
+        //Scroll object ---
+        /* 
       child: new CustomScrollView(
       scrollDirection: Axis.vertical,
       shrinkWrap: false,
       */
-      body:SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          SizedBox(height: 24.0),
-          // "Name" form.
-          TextFormField(
-            textCapitalization: TextCapitalization.words,
-            decoration: InputDecoration(
-              border: UnderlineInputBorder(),
-              filled: true,
-              icon: Icon(Icons.person),
-              hintText: 'What do people call you?',
-              labelText: 'Name *',
-            ),
-            onSaved: (String value) {
-              this._name = value;
-              print('name=$_name');
-            },
-            validator: _validateName,
-          ),
-          SizedBox(height: 24.0),
-          // "Phone number" form.
-          TextFormField(
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              filled: true,
-              icon: Icon(Icons.phone),
-              hintText: 'Where can we reach you?',
-              labelText: 'Phone Number *',
-              prefixText: '+86',
-            ),
-            keyboardType: TextInputType.phone,
-            onSaved: (String value) {
-              this._phoneNumber = value;
-              print('phoneNumber=$_phoneNumber');
-            },
-            // TextInputFormatters are applied in sequence.
-            inputFormatters: <TextInputFormatter>[
-              WhitelistingTextInputFormatter.digitsOnly,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              SizedBox(height: 24.0),
+              // "Name" form.
+              TextFormField(
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(),
+                  filled: true,
+                  icon: Icon(Icons.person),
+                  hintText: 'What do people call you?',
+                  labelText: 'Name *',
+                ),
+                onSaved: (String value) {
+                  this._name = value;
+                  print('name=$_name');
+                },
+                validator: _validateName,
+              ),
+              SizedBox(height: 24.0),
+              // "Phone number" form.
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  filled: true,
+                  icon: Icon(Icons.phone),
+                  hintText: 'Where can we reach you?',
+                  labelText: 'Phone Number *',
+                  prefixText: '+86',
+                ),
+                keyboardType: TextInputType.phone,
+                onSaved: (String value) {
+                  this._phoneNumber = value;
+                  print('phoneNumber=$_phoneNumber');
+                },
+                // TextInputFormatters are applied in sequence.
+                inputFormatters: <TextInputFormatter>[
+                  WhitelistingTextInputFormatter.digitsOnly,
+                ],
+              ),
+              SizedBox(height: 24.0),
+              // "Email" form.
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  filled: true,
+                  icon: Icon(Icons.email),
+                  hintText: 'Your email address',
+                  labelText: 'E-mail',
+                ),
+                keyboardType: TextInputType.emailAddress,
+                onSaved: (String value) {
+                  this._email = value;
+                  print('email=$_email');
+                },
+              ),
+              SizedBox(height: 24.0),
+              // "Life story" form.
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Tell us about yourself',
+                  helperText: 'Keep it short, this is just a demo.',
+                  labelText: 'Life story',
+                ),
+                maxLines: 3,
+              ),
+              SizedBox(height: 24.0),
+              // "Salary" form.
+              TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Salary',
+                    prefixText: '\$ ',
+                    suffixText: 'USD',
+                    suffixStyle: TextStyle(color: Colors.green)),
+                maxLines: 1,
+              ),
+              SizedBox(height: 24.0),
+              // "Password" form.
+              PasswordField(
+                fieldKey: _passwordFieldKey,
+                helperText: 'No more than 8 characters.',
+                labelText: 'Password *',
+                onFieldSubmitted: (String value) {
+                  setState(() {
+                    this._password = value;
+                  });
+                },
+              ),
+              SizedBox(height: 24.0),
+              // "Re-type password" form.
+              TextFormField(
+                enabled: this._password != null && this._password.isNotEmpty,
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  filled: true,
+                  labelText: 'Re-type password',
+                ),
+                maxLength: 8,
+                obscureText: true,
+              ),
+              RaisedButton(onPressed: () {
+                Navigator.pop(context);
+              })
             ],
           ),
-          SizedBox(height: 24.0),
-          // "Email" form.
-          TextFormField(
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              filled: true,
-              icon: Icon(Icons.email),
-              hintText: 'Your email address',
-              labelText: 'E-mail',
-            ),
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (String value) {
-              this._email = value;
-              print('email=$_email');
-            },
-          ),
-          SizedBox(height: 24.0),
-          // "Life story" form.
-          TextFormField(
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Tell us about yourself',
-              helperText: 'Keep it short, this is just a demo.',
-              labelText: 'Life story',
-            ),
-            maxLines: 3,
-          ),
-          SizedBox(height: 24.0),
-          // "Salary" form.
-          TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Salary',
-                prefixText: '\$',
-                suffixText: 'USD',
-                suffixStyle: TextStyle(color: Colors.green)),
-            maxLines: 1,
-          ),
-          SizedBox(height: 24.0),
-          // "Password" form.
-          PasswordField(
-            fieldKey: _passwordFieldKey,
-            helperText: 'No more than 8 characters.',
-            labelText: 'Password *',
-            onFieldSubmitted: (String value) {
-              setState(() {
-                this._password = value;
-              });
-            },
-          ),
-          SizedBox(height: 24.0),
-          // "Re-type password" form.
-          TextFormField(
-            enabled: this._password != null && this._password.isNotEmpty,
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              filled: true,
-              labelText: 'Re-type password',
-            ),
-            maxLength: 8,
-            obscureText: true,
-          ),
-          RaisedButton(onPressed: (){
-          Navigator.pop(context);
-        })
-        ],
-      ),
-    )
-    );
-    
+        ));
   }
 }
 

@@ -6,6 +6,7 @@ import 'firstFull.dart';
 import 'passwordWidget.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -24,13 +25,15 @@ class _MyHomePageState extends State<MyHomePage> {
     print("Initial méthode");
     asynchroneOne();
   }
+
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
+
   // si je veux forcer l'affichage de One avant two ... async -> await
-  void asynchroneOne() async{
+  void asynchroneOne() async {
     /*
     
     await Future.delayed(Duration(seconds:4),(){
@@ -42,21 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     
     
-     */       
-    Response _response=await get('https://jsonplaceholder.typicode.com/todos/1');
+     */
+    Response _response =
+        await get('https://jsonplaceholder.typicode.com/todos/1');
     print(_response.body);
-    Map myData=jsonDecode(_response.body);
+    Map myData = jsonDecode(_response.body);
     print(myData["userId"]);
   }
+
   @override
   Widget build(BuildContext context) {
     print("Méthode build");
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
-        centerTitle:true,
-        backgroundColor:Colors.orangeAccent,
+        centerTitle: true,
+        backgroundColor: Colors.orangeAccent,
       ),
       //Scroll object ---
       /* 
@@ -66,25 +70,22 @@ class _MyHomePageState extends State<MyHomePage> {
       */
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-              child: Center(
-
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               //Pading=Container - color - marging
               Padding(
-                padding:EdgeInsets.only(
-                  left: 100.0
-                ),
-                child: Text("Pading Container"), 
+                padding: EdgeInsets.only(left: 100.0),
+                child: Text("Pading Container"),
               ),
-              //Container 
+              //Container
               Container(
                 child: Text(("Je suis dans le container")),
-                padding:EdgeInsets.symmetric( // Plus les autres choix : all , zero , ltrb ...
-                  vertical: 10.0,
-                  horizontal: 15.0
-                ),
+                padding: EdgeInsets.symmetric(
+                    // Plus les autres choix : all , zero , ltrb ...
+                    vertical: 10.0,
+                    horizontal: 15.0),
                 width: 100.0,
                 height: 150.0,
                 color: Colors.red,
@@ -95,30 +96,29 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               // Icon cliquable
               IconButton(
-                icon: Icon(Icons.ac_unit) , 
-                onPressed: (){print("OK");}
-                ),
+                  icon: Icon(Icons.ac_unit),
+                  onPressed: () {
+                    print("OK");
+                  }),
               // FlatButton & Raised Button ont l'option X.icon
               RaisedButton.icon(
-                onPressed: (){
-                 Navigator.pushNamed(context, RoutingRoute, arguments: 'Nasssiiim');
-                }, 
-                icon: Icon(
-                  Icons.assignment_late
-                ), 
-                label: Text("Le label ici")
-                ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, RoutingRoute,
+                        arguments: 'Nasssiiim');
+                  },
+                  icon: Icon(Icons.assignment_late),
+                  label: Text("Le label ici")),
               FlatButton(
-                onPressed: (){},
+                onPressed: () {},
                 child: Text("Flatten Button sans icon"),
                 textColor: Colors.lightBlueAccent,
                 color: Colors.brown,
-                ),
+              ),
               RaisedButton(
-                onPressed: (){},
+                onPressed: () {},
                 color: Colors.red,
                 child: Text("RAISED BUTTON"),
-                ),
+              ),
               // les icons
               Icon(
                 Icons.battery_unknown,
@@ -126,33 +126,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.blue,
                 semanticLabel: 'Un label Sémantique',
                 //textDirection: TextDirection.rtl, l'entre sense
-                ),
+              ),
               // Afficher une image a partir d'une URL
               Image(
-                image:NetworkImage('https://www.fcbarcelona.com/photo-resources/2019/09/26/43931b52-6dcb-4f1e-8fba-81e5b688f11a/10_MESSI_JUGADORS-WEB.jpg?width=1200&height=750'),
+                image: NetworkImage(
+                    'https://www.fcbarcelona.com/photo-resources/2019/09/26/43931b52-6dcb-4f1e-8fba-81e5b688f11a/10_MESSI_JUGADORS-WEB.jpg?width=1200&height=750'),
                 height: 40.0,
-               ),
-               // Afficher une Image a partir d'un fichier image
-               // on peut utiliser : Image.network , Image.asset
-               SizedBox(
-                 height: 20.0,
-               ),
-               Image(
-                 image: AssetImage('assets/messi.jpg'),
-                 height: 22.0,
-                 
-                 ),
-                 CircleAvatar(
-                   backgroundImage: AssetImage("assets/messi.jpg"),
-                   radius: 50.0,
-
-                 ),
+              ),
+              // Afficher une Image a partir d'un fichier image
+              // on peut utiliser : Image.network , Image.asset
+              SizedBox(
+                height: 20.0,
+              ),
+              Image(
+                image: AssetImage('assets/messi.jpg'),
+                height: 22.0,
+              ),
+              CircleAvatar(
+                backgroundImage: AssetImage("assets/messi.jpg"),
+                radius: 50.0,
+              ),
               Text(
                 'Text Style',
-                style:TextStyle(
-                  color:Colors.green,
-                  backgroundColor:Colors.yellow,
-                  fontSize:40.0,
+                style: TextStyle(
+                  color: Colors.green,
+                  backgroundColor: Colors.yellow,
+                  fontSize: 40.0,
                   //fontWeight: FontWeight.bold,
                   letterSpacing: 20.0,
                   fontFamily: 'Pacifico',
@@ -162,9 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 '$_counter',
                 style: Theme.of(context).textTheme.headline4,
               ),
-              Text(
-                'Salut'
-              ),
+              Text('Salut'),
               // Rowes:
               Row(
                 // Alignement Main & Cross
@@ -172,34 +169,36 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Expanded(
-                    flex: 2,
-                    child: Container(
-                      width: 30.0,
-                      child: Text("First"),
-                      height: 30.0,
-                      color: Colors.green,
-                      )
-                    ),
+                      flex: 2,
+                      child: Container(
+                        width: 30.0,
+                        child: Text("First"),
+                        height: 30.0,
+                        color: Colors.green,
+                      )),
                   Expanded(
-                    flex: 1,
-                    child: Container(
-                      width: 30.0,
-                      child: Text("seconde"),
-                      height: 30.0,
-                      color: Colors.blueGrey,
-                      )
-                    ),
+                      flex: 1,
+                      child: Container(
+                        width: 30.0,
+                        child: Text("seconde"),
+                        height: 30.0,
+                        color: Colors.blueGrey,
+                      )),
                 ],
               ),
               //MyFirstStFull(),
               Passwords(),
               Divider(),
               RaisedButton(
-                onPressed: (){Navigator.pushNamed(context, TextFieldExampleRouting);},
+                onPressed: () {
+                  Navigator.pushNamed(context, TextFieldExampleRouting);
+                },
                 child: Text("TextFields"),
               ),
               RaisedButton(
-                onPressed: (){Navigator.pushNamed(context, FormTextFieldExampleRouting);},
+                onPressed: () {
+                  Navigator.pushNamed(context, FormTextFieldExampleRouting);
+                },
                 child: Text("FormTextFields"),
               ),
             ],
@@ -210,8 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'cliquer pour incrémenter',
         child: Icon(Icons.add),
-        hoverColor:Colors.red,
-
+        hoverColor: Colors.red,
       ),
     );
   }
